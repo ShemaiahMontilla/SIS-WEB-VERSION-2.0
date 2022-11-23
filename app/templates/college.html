@@ -1,0 +1,78 @@
+{%- extends "layouts/master_layout.html" %}
+
+{# Loads some of the macros included with Flask-Bootstrap. We are using the
+   utils module here to automatically render Flask's flashed messages in a
+   bootstrap friendly manner #}
+{% import "bootstrap/utils.html" as utils %}
+{% block content %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">College</li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="col  text-right">
+                <span class="float-right"><a href="{{ url_for('.add_course') }}" class="btn btn-primary">Add New College </a></span>
+            </div>
+            <a href="{{ url_for('.index') }}" class="btn btn-primary">View Students Table </a>
+       
+            <a href="{{ url_for('.course') }}" class="btn btn-primary">View Courses Table </a></span>
+
+
+        </div>
+        <input type="text" id="myInput" maxlength="30" onkeyup="myFunction()" placeholder="Search for College by College Code.." >
+        <div class="row mt-2">
+            <table id="myTable">
+               
+                <tr class="header">
+                    <th>College Code</th>
+                    <th>College Name</th>
+                    
+	                <th></th>
+                </tr>
+	           
+	           
+		        {% for college in data %}
+		            <tr>
+			            <td>{{college[0]}}</td>
+			            <td>{{college[1]}}</td>
+			        
+
+                        <td>
+                            <a style="text-decoration: none;" href="college/edit/{{college[0]}}">
+                                <button 
+                                class="btn btn-outline-primary rounded" 
+                                style="padding: 5px 10px 5px 10px;">Edit</button>
+                                </a>
+                        </td>
+                        <td><a href="college/delete/{{college[0]}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+		            </tr>
+		        {% endfor %}
+            </table>
+            <script>
+                function myFunction() {
+                  // Declare variables
+                  var input, filter, table, tr, td, i, txtValue;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("myTable");
+                  tr = table.getElementsByTagName("tr");
+                
+                  // Loop through all table rows, and hide those who don't match the search query
+                  for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                      txtValue = td.textContent || td.innerText;
+                      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                      } else {
+                        tr[i].style.display = "none";
+                      }
+                    }
+                  }
+                }
+                </script>
+        </div>
+    </div>
+{%- endblock %}
