@@ -80,9 +80,10 @@ class college(object):
         cursor.execute(sql)
         mysql.connection.commit()
 
+
     def edit(self, college_code):
         cursor = mysql.connection.cursor()
-        sql = f"UPDATE college SET name='{self.college_name}' WHERE college_code='{college_code}'" 
+        sql = f"UPDATE college SET `name`='{self.college_name}' WHERE `college`.`college_code`='{college_code}'" 
         cursor.execute(sql)
         mysql.connection.commit()
 
