@@ -15,7 +15,7 @@ class StudentForm(FlaskForm):
 class CourseForm(FlaskForm):
     course_code = StringField ('Course Code', [validators.DataRequired()])
     course_name = StringField('Course Name', [validators.DataRequired()])
-    college_code = SelectField('College Code', [validators.DataRequired()], choices = ['CASS','CBAA','CCS','CED','CET', 'CON', 'CSM'])
+    college_code = SelectField('College Code', [validators.DataRequired()], choices = ['CASS','CBAA','CCS','CED','CET', 'CON', 'CSM', 'CCCC'])
     submit = SubmitField("Submit")
 
 class CollegeForm(FlaskForm):
